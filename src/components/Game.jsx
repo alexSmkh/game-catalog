@@ -15,6 +15,7 @@ const Game = ({
 }) => {
   const dispatch = useDispatch();
   const loadGameDetailHandler = () => {
+    document.body.style.overflow = 'hidden';
     dispatch(loadGameDetail(id));
   };
 
