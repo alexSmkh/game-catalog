@@ -1,17 +1,32 @@
 /* eslint-disable no-unused-vars */
 import React from 'react';
+import { useDispatch } from 'react-redux';
 import styled from 'styled-components';
 import { motion } from 'framer-motion';
 
-const Game = ({ name, released, image }) => (
-  <StyledGame>
-    <h3>{name}</h3>
-    <p>{released}</p>
-    <ImgWrapper>
-      <img src={image} alt={name} />
-    </ImgWrapper>
-  </StyledGame>
-);
+import loadGameDetail from '../actions/gameDetailAction';
+
+const Game = ({
+  name,
+  released,
+  image,
+  id,
+}) => {
+  const dispatch = useDispatch();
+  const loadGameDetailHandler = () => {
+    dispatch(loadGameDetail(id));
+  };
+
+  return (
+    <StyledGame onClick={() => loadGameDetailHandler()}>
+      <h3>{name}</h3>
+      <p>{released}</p>
+      <ImgWrapper>
+        <img src={image} alt={name} />
+      </ImgWrapper>
+    </StyledGame>
+  );
+};
 
 const StyledGame = styled(motion.div)`
   min-height: 30vh;

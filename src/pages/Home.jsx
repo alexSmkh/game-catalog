@@ -6,6 +6,7 @@ import { motion } from 'framer-motion';
 import { loadGames } from '../actions/gamesAction';
 
 import Game from '../components/Game';
+// import GameDetail from '../components/GameDetail';
 
 const Home = () => {
   const dispatch = useDispatch();
@@ -14,7 +15,6 @@ const Home = () => {
     dispatch(loadGames());
   }, [dispatch]);
 
-  // eslint-disable-next-line no-unused-vars
   const { popular, newGames, upcoming } = useSelector((state) => state.games);
 
   return (
