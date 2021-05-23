@@ -3,6 +3,7 @@ import React from 'react';
 import { useDispatch } from 'react-redux';
 import styled from 'styled-components';
 import { motion } from 'framer-motion';
+import { Link } from 'react-router-dom';
 
 import loadGameDetail from '../actions/gameDetailAction';
 
@@ -19,11 +20,13 @@ const Game = ({
 
   return (
     <StyledGame onClick={() => loadGameDetailHandler()}>
-      <h3>{name}</h3>
-      <p>{released}</p>
-      <ImgWrapper>
-        <img src={image} alt={name} />
-      </ImgWrapper>
+      <Link to={`/game/${id}`}>
+        <h3>{name}</h3>
+        <p>{released}</p>
+        <ImgWrapper>
+          <img src={image} alt={name} />
+        </ImgWrapper>
+      </Link>
     </StyledGame>
   );
 };
@@ -33,6 +36,8 @@ const StyledGame = styled(motion.div)`
   box-shadow: 0px 5px 20px rgba(0, 0, 0, 0.2);
   text-align: center;
   border-radius: 1rem;
+  cursor: pointer;
+
   img {
     height: 100%;
     width: 100%;

@@ -1,4 +1,4 @@
-const initState = { game: {}, screenshots: {} };
+const initState = { game: {}, screenshots: {}, isLoading: true };
 
 const detailReducer = (state = initState, action) => {
   switch (action.type) {
@@ -7,6 +7,12 @@ const detailReducer = (state = initState, action) => {
         ...state,
         game: action.payload.gameDetail,
         screenshots: action.payload.gameScreenshots,
+        isLoading: false,
+      };
+    case 'LOADING_GAME_DETAIL':
+      return {
+        ...state,
+        isLoading: true,
       };
     default:
       return { ...state };
