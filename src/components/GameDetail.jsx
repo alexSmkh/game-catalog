@@ -13,6 +13,8 @@ import xbox from '../img/xbox.svg';
 import nintendo from '../img/nintendo.svg';
 import apple from '../img/apple.svg';
 import gamepad from '../img/gamepad.svg';
+import starEmpty from '../img/star-empty.png';
+import starFull from '../img/star-full.png';
 
 const GameDetail = ({ gameID }) => {
   const history = useHistory();
@@ -53,6 +55,19 @@ const GameDetail = ({ gameID }) => {
     }
   };
 
+  const getStars = () => {
+    const stars = [];
+    const rating = Math.floor(game.rating);
+    for (let i = 1; i <= 5; i += 1) {
+      if (i <= rating) {
+        stars.push(<img alt="star-full" key={i} src={starFull} />);
+      } else {
+        stars.push(<img alt="star-empty" key={i} src={starEmpty} />);
+      }
+    }
+    return stars;
+  };
+
   return (
     <>
       {!isLoading && (
@@ -62,6 +77,7 @@ const GameDetail = ({ gameID }) => {
               <div className="rating">
                 <motion.h3 layoutId={`title ${gameID}`}>{game.name}</motion.h3>
                 <p>Rating: {game.rating}</p>
+                {getStars()}
               </div>
               <Info>
                 <h3>Platforms</h3>
@@ -144,6 +160,12 @@ const Stats = styled(motion.div)`
   display: flex;
   align-items: center;
   justify-content: space-between;
+
+  img {
+    width: 2rem;
+    height: 2rem;
+    display: inline;
+  }
 `;
 
 const Info = styled(motion.div)`
