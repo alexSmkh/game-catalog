@@ -5,6 +5,9 @@ import { motion } from 'framer-motion';
 import { useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 
+import defaultImage from '../img/game-controller.png';
+import buildSmallImageURL from '../util';
+
 const GameDetail = () => {
   const history = useHistory();
 
@@ -19,6 +22,11 @@ const GameDetail = () => {
       history.push('/');
     }
   };
+
+  const imageWidth = 1280;
+  const gameImageURL = game.background_image
+    ? buildSmallImageURL(game.background_image, imageWidth)
+    : defaultImage;
 
   return (
     <>
@@ -40,7 +48,7 @@ const GameDetail = () => {
               </Info>
             </Stats>
             <Media>
-              <img src={game.background_image} alt="game" />
+              <img src={gameImageURL} alt="game" />
             </Media>
             <Description>
               <p>{game.description_raw}</p>
@@ -49,7 +57,7 @@ const GameDetail = () => {
               {screenshots.results.map((screenshot) => (
                 <img
                   key={screenshot.id}
-                  src={screenshot.image}
+                  src={buildSmallImageURL(screenshot.image, imageWidth)}
                   alt="game-screenshot"
                 />
               ))}

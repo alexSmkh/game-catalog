@@ -5,14 +5,21 @@ import styled from 'styled-components';
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 
+import defaultLogo from '../img/game-controller.png';
+import buildSmallImageURL from '../util';
 import loadGameDetail from '../actions/gameDetailAction';
 
 const Game = ({
   name,
   released,
-  image,
+  imageURL,
   id,
 }) => {
+  const imageWidth = 640;
+  const gameImageURL = imageURL
+    ? buildSmallImageURL(imageURL, imageWidth)
+    : defaultLogo;
+
   const dispatch = useDispatch();
   const loadGameDetailHandler = () => {
     document.body.style.overflow = 'hidden';
@@ -25,7 +32,7 @@ const Game = ({
         <h3>{name}</h3>
         <p>{released}</p>
         <ImgWrapper>
-          <img src={image} alt={name} />
+          <img src={gameImageURL} alt={name} />
         </ImgWrapper>
       </Link>
     </StyledGame>
