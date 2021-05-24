@@ -2,6 +2,7 @@
 
 The catalog of games, where you can see the upcoming, popular and new games. The search for games is also implemented. Data provided by rawg.io.
 
+See [here](https://game-catalog-9s5pahu2n-alexsmkh.vercel.app/)
 ## How to install
 ```
 npm install
