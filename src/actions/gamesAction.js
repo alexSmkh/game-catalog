@@ -1,7 +1,11 @@
 import axios from 'axios';
-import { popularGamesURL, upcomingGamesURL, newGamesURL } from '../api';
+import {
+  popularGamesURL,
+  upcomingGamesURL,
+  newGamesURL,
+  searchGameURL,
+} from '../api';
 
-// eslint-disable-next-line import/prefer-default-export
 export const loadGames = () => async (dispatch) => {
   const popularGamesData = await axios.get(popularGamesURL());
   const newGamesData = await axios.get(newGamesURL());
@@ -13,6 +17,16 @@ export const loadGames = () => async (dispatch) => {
       popular: popularGamesData.data.results,
       upcoming: upcomingGamesData.data.results,
       newGames: newGamesData.data.results,
+    },
+  });
+};
+
+export const fetchSearch = (gameName) => async (dispatch) => {
+  const searchGames = await axios.get(searchGameURL(gameName));
+  dispatch({
+    type: 'FETCH_SEARCHED',
+    payload: {
+      searched: searchGames.data.results,
     },
   });
 };

@@ -35,3 +35,7 @@ export const newGamesURL = () => `${baseURL}games?${keyParam}dates=${lastYear},$
 export const gameDetailsURL = (gameID) => `${baseURL}games/${gameID}?${keyParam}`;
 
 export const gameScreenshotsURL = (gameID) => `${baseURL}games/${gameID}/screenshots?${keyParam}`;
+
+export const searchGameURL = (gameName) => (
+  `${baseURL}games?${keyParam}search=${gameName}&page_size=8`
+);
