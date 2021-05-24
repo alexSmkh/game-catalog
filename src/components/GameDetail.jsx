@@ -8,7 +8,7 @@ import { useHistory } from 'react-router-dom';
 import defaultImage from '../img/game-controller.png';
 import buildSmallImageURL from '../util';
 
-const GameDetail = () => {
+const GameDetail = ({ gameID }) => {
   const history = useHistory();
 
   const { game, screenshots, isLoading } = useSelector(
@@ -32,10 +32,10 @@ const GameDetail = () => {
     <>
       {!isLoading && (
         <CardShadow className="shadow" onClick={(e) => exitDetailHandler(e)}>
-          <Detail>
+          <Detail layoutId={gameID}>
             <Stats>
               <div className="rating">
-                <h3>{game.name}</h3>
+                <motion.h3 layoutId={`title ${gameID}`}>{game.name}</motion.h3>
                 <p>Rating: {game.rating}</p>
               </div>
               <Info>
@@ -48,7 +48,11 @@ const GameDetail = () => {
               </Info>
             </Stats>
             <Media>
-              <img src={gameImageURL} alt="game" />
+              <motion.img
+                layoutId={`image ${gameID}`}
+                src={gameImageURL}
+                alt="game"
+              />
             </Media>
             <Description>
               <p>{game.description_raw}</p>
@@ -77,6 +81,7 @@ const CardShadow = styled(motion.div)`
   position: fixed;
   top: 0;
   left: 0;
+  z-index: 5;
 
   &::-webkit-scrollbar {
     width: 0.5rem;
@@ -99,6 +104,7 @@ const Detail = styled(motion.div)`
   position: absolute;
   left: 10%;
   color: black;
+  z-index: 10;
 
   img {
     width: 100%;
@@ -118,6 +124,7 @@ const Info = styled(motion.div)`
 const Platforms = styled(motion.div)`
   display: flex;
   justify-content: space-evenly;
+
   img {
     margin-left: 3rem;
   }
@@ -125,6 +132,7 @@ const Platforms = styled(motion.div)`
 
 const Media = styled(motion.div)`
   margin-top: 5rem;
+
   img {
     width: 100%;
   }

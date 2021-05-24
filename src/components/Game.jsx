@@ -26,14 +26,17 @@ const Game = ({
     dispatch(loadGameDetail(id));
   };
 
+  const gameId = String(id);
   return (
-    <StyledGame onClick={() => loadGameDetailHandler()}>
+    <StyledGame layoutId={gameId} onClick={() => loadGameDetailHandler()}>
       <Link to={`/game/${id}`}>
-        <h3>{name}</h3>
+        <motion.h3 layoutId={`title ${gameId}`}>{name}</motion.h3>
         <p>{released}</p>
-        <ImgWrapper>
-          <img src={gameImageURL} alt={name} />
-        </ImgWrapper>
+        <motion.img
+          layoutId={`image ${gameId}`}
+          src={gameImageURL}
+          alt={name}
+        />
       </Link>
     </StyledGame>
   );
@@ -45,18 +48,13 @@ const StyledGame = styled(motion.div)`
   text-align: center;
   border-radius: 1rem;
   cursor: pointer;
+  overflow: hidden;
 
   img {
-    height: 100%;
+    height: 40vh;
     width: 100%;
     object-fit: cover;
-    border-radius: 0 0 1rem 1rem;
   }
-`;
-
-const ImgWrapper = styled(motion.div)`
-  width: 100%;
-  height: 40vh;
 `;
 
 export default Game;
