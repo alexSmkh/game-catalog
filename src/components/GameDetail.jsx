@@ -7,6 +7,12 @@ import { useHistory } from 'react-router-dom';
 
 import defaultImage from '../img/game-controller.png';
 import buildSmallImageURL from '../util';
+import playstation from '../img/playstation.svg';
+import steam from '../img/steam.svg';
+import xbox from '../img/xbox.svg';
+import nintendo from '../img/nintendo.svg';
+import apple from '../img/apple.svg';
+import gamepad from '../img/gamepad.svg';
 
 const GameDetail = ({ gameID }) => {
   const history = useHistory();
@@ -28,6 +34,25 @@ const GameDetail = ({ gameID }) => {
     ? buildSmallImageURL(game.background_image, imageWidth)
     : defaultImage;
 
+  const getPlatform = (platform) => {
+    switch (platform) {
+      case 'PlayStation 4':
+      case 'PlayStation 5':
+        return playstation;
+      case 'Xbox One':
+      case 'Xbox Series S/X':
+        return xbox;
+      case 'PC':
+        return steam;
+      case 'Nintendo Switch':
+        return nintendo;
+      case 'iOS':
+        return apple;
+      default:
+        return gamepad;
+    }
+  };
+
   return (
     <>
       {!isLoading && (
@@ -42,7 +67,11 @@ const GameDetail = ({ gameID }) => {
                 <h3>Platforms</h3>
                 <Platforms>
                   {game.platforms.map((data) => (
-                    <h3 key={data.platform.id}>{data.platform.name}</h3>
+                    <img
+                      key={data.platform.id}
+                      src={getPlatform(data.platform.name)}
+                      alt={data.platform.name}
+                    />
                   ))}
                 </Platforms>
               </Info>
@@ -123,10 +152,10 @@ const Info = styled(motion.div)`
 
 const Platforms = styled(motion.div)`
   display: flex;
-  justify-content: space-evenly;
+  justify-content: space-between;
 
   img {
-    margin-left: 3rem;
+    margin: 0 1rem;
   }
 `;
 
