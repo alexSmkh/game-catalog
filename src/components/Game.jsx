@@ -8,6 +8,7 @@ import { Link } from 'react-router-dom';
 import defaultLogo from '../img/game-controller.png';
 import buildSmallImageURL from '../util';
 import loadGameDetail from '../actions/gameDetailAction';
+import { popup } from '../animations';
 
 const Game = ({
   name,
@@ -28,7 +29,13 @@ const Game = ({
 
   const gameId = String(id);
   return (
-    <StyledGame layoutId={gameId} onClick={() => loadGameDetailHandler()}>
+    <StyledGame
+      variants={popup}
+      initial="hidden"
+      animate="show"
+      layoutId={gameId}
+      onClick={() => loadGameDetailHandler()}
+    >
       <Link to={`/game/${id}`}>
         <motion.h3 layoutId={`title ${gameId}`}>{name}</motion.h3>
         <p>{released}</p>
